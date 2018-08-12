@@ -101,9 +101,24 @@ public class GameDao {
 				do {
 					gameList.add(makeQuizFromResultSet(rs));
 				} while (rs.next());
-				return Collections.emptyList();
+				return gameList;
+			}else{
+		           return Collections.emptyList();
 			}
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
-		
+	}
+	public int delete(Connection conn, int quizId)throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+		  pstmt = conn.prepareStatement (
+		   "delete from quizboard_collection where quiz_id = ?");
+		  pstmt.setInt(1, quizId);
+		  return pstmt.executeUpdate();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
 	}
 }
