@@ -56,10 +56,11 @@ public class GameDao {
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
-		}
-		
+		}	
 	}
 
+	
+	
 	private Game makeQuizFromResultSet(ResultSet rs) throws SQLException{
 		Game game = new Game();
 		game.setId(rs.getInt("quiz_id"));
@@ -79,7 +80,7 @@ public class GameDao {
 					"select count(*) from quizboard_collection");
 			rs.next();
 			return rs.getInt(1);
-		} finally {
+		}finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(stmt);
 		}
@@ -92,7 +93,8 @@ public class GameDao {
 		
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from quizboard_collection order by quiz_id desc limit ?,?)");
+					"select * from quizboard_collection "+
+				    "order by quiz_id desc limit ?,?");
 			pstmt.setInt(1, firstRow - 1);
 			pstmt.setInt(2, endRow - firstRow + 1);
 			rs = pstmt.executeQuery();
