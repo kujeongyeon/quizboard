@@ -20,23 +20,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>퀴즈 목록</title>
+<link rel="stylesheet" href="Resouces/css/bootstrap.css">
 </head>
 <body>
-<form action="writeQuiz.jsp" method="post">
-퀴즈 : <textarea name="quiz" cols="30" rows="3"></textarea><br>
-답 : <input type="text" name="answer"><br>
-비밀번호 : <input type="text" name="password">
-<input type="submit" value="퀴즈만들기"/>
-</form>
-<hr>
-<c:if test="${viewData.isEmpty()}">
-등록된 퀴즈가 없습니다.
-</c:if>
-
+<div class="container">
+	<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="center-block">
+		<form action="writeQuiz.jsp" method="post">
+			퀴즈 : <textarea name="quiz" cols="30" rows="3"></textarea><br>
+			답 : <input type="text" name="answer"><br>
+			비밀번호 : <input type="text" name="password">
+			<input type="submit" value="퀴즈만들기"/>
+		</form>
+		<hr>
+		<c:if test="${viewData.isEmpty()}">
+			등록된 퀴즈가 없습니다.
+		</c:if>
+	
 <c:if test="${!viewData.isEmpty()}">
-<table border="1">
-<tr>
-	<th>퀴즈 번호</th>
+<table class="table table-striped table-hover table-condensed" border="1">
+</tr>
+	<th>퀴즈 번호
+	</th>
 	<th>내용</th>
 	<th>퀴즈 풀기</th>
 	<th>삭제</th>
@@ -50,10 +57,15 @@
 </tr>
 </c:forEach>
 </table>
-
 <c:forEach var="pageNum" begin="1" end="${viewData.pageTotalCount}">
 <a href="list.jsp?page=${pageNum}">[${pageNum}]</a>
 </c:forEach>
 </c:if>
+	</div>
+	</div>
+	<div class="col-md-2"></div>
+	</div>
+</div>
+<script type="text/javascript" src="Resouces/js/bootstrap.js"></script>
 </body>
 </html>

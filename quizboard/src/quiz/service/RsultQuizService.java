@@ -16,22 +16,24 @@ public class RsultQuizService {
 
 	private RsultQuizService() {}
 	
-	public void rsult(int quizId, String answer) throws SQLException {
+	public void rsult(int quizId, String answer) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-	
 			GameDao gameDao = GameDao.getInstance();
 			Game game = gameDao.select(conn, quizId);
 			if(game == null) {
-				throw new QuizNotFoundException("메시지 없음");
+				throw new QuizNotFoundException("메세지없음");
 			}
 			if(!game.matchAnswer(answer)) {
-				throw new InvalidException("틀렸습니다!");
+				throw new InvalidException ("bad password");
 			}
-			
-		} finally {
+		}catch(SQLException e){
+				throw new ServiceException("실패:"+e.getMessage(), e);
+			} finally {
 		JdbcUtil.close(conn);
 		}
 	}
+
 }
+	

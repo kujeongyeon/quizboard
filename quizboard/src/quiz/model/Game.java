@@ -42,7 +42,7 @@ public class Game {
 		return password != null & password.equals(pwd);
 	}
 	public boolean matchAnswer(String ans) {
-		return ans != null & password.equals(ans);
+		return ans != null & answer.equals(ans);
 	}
 	
 

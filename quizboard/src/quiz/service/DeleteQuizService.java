@@ -11,11 +11,10 @@ public class DeleteQuizService {
 
 	private static DeleteQuizService instance = new DeleteQuizService();
 	
-	public DeleteQuizService getInstance () {
+	public static DeleteQuizService getInstance() {
 		return instance;
 	}
-	private DeleteQuizService() {
-	}
+	private DeleteQuizService() {}
 	
 	public void delete(int quizId,String password) {
 		Connection conn = null;
